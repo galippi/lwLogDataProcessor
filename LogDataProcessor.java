@@ -1,3 +1,5 @@
+package LwLogDataProcessor;
+
 import java.util.TreeMap;
 import java.util.Vector;
 
@@ -180,32 +182,6 @@ class LogDataProcessorHexu8Array extends LogDataProcessorHexu8ArrayBase {
 }
 
 public class LogDataProcessor {
-
-    public static void main(String[] args) {
-        LogDataProcessor processor = new LogDataProcessor();
-        processor.addHandler(new LogDataProcessorHandler("A"));
-        processor.addHandler(new LogDataProcessorHandler("AC"));
-        processor.addHandler(new LogDataProcessorHandler("RV"));
-        processor.addHandler(new LogDataProcessorHexu16("Q"));
-        processor.addHandler(new LogDataProcessorHexu8Array("TQ"));
-        processor.process("AAA", new LogDataProcessorDefaultHandler());
-        processor.process("A", new LogDataProcessorDefaultHandler());
-        processor.process("AC", new LogDataProcessorDefaultHandler());
-        processor.process("O3", new LogDataProcessorDefaultHandler());
-        processor.process("RV", new LogDataProcessorDefaultHandler());
-        processor.process("RV5", new LogDataProcessorDefaultHandler());
-        processor.process("RT5", new LogDataProcessorDefaultHandler());
-        processor.process("Q0", new LogDataProcessorDefaultHandler());
-        processor.process("Q9", new LogDataProcessorDefaultHandler());
-        processor.process("QA", new LogDataProcessorDefaultHandler());
-        processor.process("QF", new LogDataProcessorDefaultHandler());
-        processor.process("Qa", new LogDataProcessorDefaultHandler());
-        processor.process("Qf", new LogDataProcessorDefaultHandler());
-        processor.process("QFF", new LogDataProcessorDefaultHandler());
-        processor.process("Q100G", new LogDataProcessorDefaultHandler());
-        processor.process("TQ00A0BCWow", new LogDataProcessorDefaultHandler());
-    }
-
     LogDataProcessor() {
         
     }
