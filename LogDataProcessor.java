@@ -46,7 +46,7 @@ class LogDataProcessorHexu8Array extends LogDataProcessorHexu8ArrayBase {
     }
 
     @Override
-    void process(byte[] data, String rest) {
+    public void process(byte[] data, String rest) {
         String dataStr = "";
         for (int i = 0; i < data.length; i++)
             dataStr = dataStr + ' ' + (((int)data[i]) & 0xFF);

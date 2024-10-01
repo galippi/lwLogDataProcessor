@@ -2,11 +2,11 @@ package lwLogDataProcessor;
 
 import java.util.Vector;
 
-abstract class LogDataProcessorHexu8ArrayBase extends LogDataProcessorHandlerBase {
+public abstract class LogDataProcessorHexu8ArrayBase extends LogDataProcessorHandlerBase {
 
-    abstract void process(byte[] data, String rest);
+    public abstract void process(byte[] data, String rest);
 
-    LogDataProcessorHexu8ArrayBase(String prefix) {
+    protected LogDataProcessorHexu8ArrayBase(String prefix) {
         super(prefix);
     }
 
