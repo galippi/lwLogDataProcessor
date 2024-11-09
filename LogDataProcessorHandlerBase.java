@@ -1,7 +1,7 @@
 package lwLogDataProcessor;
 
-abstract class LogDataProcessorHandlerBase implements LogDataProcessorInterface {
-    LogDataProcessorHandlerBase(String prefix) {
+abstract public class LogDataProcessorHandlerBase implements LogDataProcessorInterface {
+    public LogDataProcessorHandlerBase(String prefix) {
         this.prefix = prefix;
     }
 
