@@ -2,6 +2,12 @@ package lwLogDataProcessor;
 
 import java.util.Vector;
 
+class ResultProcess
+{
+    byte[] result;
+    String rest;
+}
+
 public abstract class LogDataProcessorHexu8ArrayBase extends LogDataProcessorHandlerBase {
 
     public abstract void process(byte[] data, String rest);
@@ -10,7 +16,7 @@ public abstract class LogDataProcessorHexu8ArrayBase extends LogDataProcessorHan
         super(prefix);
     }
 
-    private int hex2dec(char c) throws Exception {
+    private static int hex2dec(char c) throws Exception {
         if ((c >= '0') && (c <= '9'))
             return (c - '0');
         else
@@ -52,5 +58,44 @@ public abstract class LogDataProcessorHexu8ArrayBase extends LogDataProcessorHan
             process(result, rest);
         } else
             throw new Error("Invalid data to be processed (data=" + dataOrig + ")!");
+    }
+
+    static ResultProcess rp = new ResultProcess();
+
+    static ResultProcess processString(String prefix, String data) {
+        String dataOrig = data;
+        data = data.substring(prefix.length());
+        String rest = null;
+        Vector<Integer> val = new Vector<>();
+        for(int i = 0; i < data.length(); i+=2) {
+            int d0, d1;
+            try {
+                d0 = hex2dec(data.charAt(i));
+            }catch (Exception e) {
+                rest = data.substring(i);
+                break;
+            }
+            try {
+                d1 = hex2dec(data.charAt(i + 1));
+            }catch (Exception e) {
+                rest = data.substring(i + 1);
+                break;
+            }
+            val.add(d0 * 16 + d1);
+        }
+        if (val.size() > 0) {
+            byte [] result = new byte[val.size()];
+            for (int i = 0; i < result.length; i++)
+                result[i] = (byte)(val.get(i) & 0xFF);
+            rp.result = result;
+            rp.rest = rest;
+            return rp;
+        } else
+            throw new Error("Invalid data to be processed (data=" + dataOrig + ")!");
+    }
+
+    public static byte[] toByteArray(String prefix, String val) {
+        rp = processString(prefix, val);
+        return rp.result;
     }
 }
