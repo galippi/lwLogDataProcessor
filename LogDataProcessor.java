@@ -2,6 +2,8 @@ package lwLogDataProcessor;
 
 import java.util.TreeMap;
 
+import lippiWare.utils.dbg;
+
 class LogDataProcessorBase implements LogDataProcessorInterface {
     @Override
     public boolean isHandler() {
@@ -90,7 +92,11 @@ public class LogDataProcessor {
             }
         }
         if (lastValidHandler != null) {
-            lastValidHandler.process(data);
+            try {
+                lastValidHandler.process(data);
+            }catch (Exception e) {
+                dbg.println(3, "LogDataProcessor.process exception e=" + e.toString() + " data=" + data);
+            }
         }
     }
 

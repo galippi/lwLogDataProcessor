@@ -2,5 +2,5 @@ package lwLogDataProcessor;
 
 interface LogDataProcessorInterface {
     boolean isHandler();
-    void process(String data);
+    void process(String data) throws Exception;
 }

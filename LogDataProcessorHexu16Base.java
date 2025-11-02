@@ -9,12 +9,12 @@ public abstract class LogDataProcessorHexu16Base extends LogDataProcessorHandler
     }
 
     @Override
-    public final void process(String data) {
+    public final void process(String data) throws Exception {
         String dataOrig = data;
         data = data.substring(getPrefix().length());
         String rest = null;
         int val = 0;
-        boolean valValid = false;
+        boolean valValid = true;
         for(int i = 0; i < data.length(); i++) {
             char c = data.charAt(i);
             if ((c >= '0') && (c <= '9'))
@@ -27,13 +27,13 @@ public abstract class LogDataProcessorHexu16Base extends LogDataProcessorHandler
                 val = (val * 16) + (c - 'a' + 10);
             else {
                 rest = data.substring(i);
+                valValid = false;
                 break;
             }
-            valValid = true;
         }
         if (valValid)
             process(val, rest);
         else
-            throw new Error("Invalid data to be processed (data=" + dataOrig + ")!");
+            throw new Exception("Invalid data to be processed (data=" + dataOrig + ")!");
     }
 }
